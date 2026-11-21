@@ -1,0 +1,38 @@
+export const brand = {
+  legalName: 'Our Hope Foundation',
+  shortName: 'Our Hope',
+  tagline: 'Nurturing Abilities · Inspiring Futures · Building Tomorrows',
+  missionLine: 'Disability family education and community development',
+  heroHeadline: 'When families learn, every day becomes support.',
+  email: 'hello@ourhopefoundation.org.au',
+  phone: '',
+  locale: 'en-AU',
+  currency: 'aud',
+  timezone: 'Australia/Sydney',
+  donationPresetsCents: [2500, 5000, 10000, 25000] as const,
+  donationMinCents: 200,
+  donationMaxCents: 10_000_000,
+  acknowledgement:
+    'Our Hope Foundation acknowledges the Traditional Custodians of the lands on which we live and work, and pays respect to Elders past and present. We acknowledge the lived experience of people with disability and their families.',
+} as const;
+
+export const colors = {
+  canvas: '#FFFFFF',
+  mist: '#F4F7FB',
+  sand: '#FFF8F1',
+  ink: '#1A2456',
+  inkBody: '#243056',
+  muted: '#4E596B',
+  blue: '#2451C9',
+  teal: '#1BB5C4',
+  tealDeep: '#0C7C88',
+  green: '#2F8F3A',
+  amber: '#E09400',
+  orange: '#E86A12',
+  orangeDeep: '#C4470F',
+  magenta: '#F04E98',
+  magentaDeep: '#B4236A',
+  yellow: '#FFE566',
+  violet: '#7A45C4',
+  line: '#E4E8F0',
+} as const;

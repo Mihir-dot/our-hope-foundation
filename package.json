@@ -1,0 +1,18 @@
+{
+  "name": "our-hope-foundation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Our Hope Foundation — Disability Family Education NPO platform",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter @ohf/api --filter @ohf/web run dev",
+    "dev:api": "pnpm --filter @ohf/api dev",
+    "dev:web": "pnpm --filter @ohf/web dev",
+    "build": "pnpm --filter @ohf/shared build && pnpm --filter @ohf/api build && pnpm --filter @ohf/web build",
+    "seed": "pnpm --filter @ohf/api seed",
+    "lint": "pnpm -r run lint"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

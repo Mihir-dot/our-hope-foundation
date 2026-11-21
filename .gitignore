@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+coverage/
+out/
+
+# Environment / secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+
+# Runtime / local
+uploads/
+tmp/
+*.log
+.DS_Store
+.vercel
+.pnpm-store/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*~

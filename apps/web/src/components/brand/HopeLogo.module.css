@@ -1,0 +1,35 @@
+.logo { display: block; overflow: visible; }
+.beam {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: beamPulse 3.8s ease-in-out infinite;
+}
+.bird { animation: birdFloat 5.6s ease-in-out infinite; }
+.birdDelay { animation-delay: -1.7s; }
+.birdLate { animation-delay: -3.1s; }
+.wave {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: waveShift 7.5s ease-in-out infinite;
+}
+.waveAlt { animation-duration: 9s; animation-delay: -2s; }
+.wordmark { font-family: var(--font-outfit), Outfit, sans-serif; font-weight: 800; }
+.foundation { font-family: var(--font-outfit), Outfit, sans-serif; font-weight: 700; letter-spacing: 0.18em; }
+.tagline { font-family: var(--font-outfit), Outfit, sans-serif; font-weight: 650; }
+
+@keyframes beamPulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+@keyframes birdFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes waveShift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam, .bird, .wave { animation: none; }
+}
