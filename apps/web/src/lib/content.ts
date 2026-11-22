@@ -1,4 +1,5 @@
 import { serverFetch } from './api';
+import { primaryNav } from './nav';
 import type {
   EventItem,
   ListResult,
@@ -91,15 +92,7 @@ export function searchContent(q: string) {
   );
 }
 
-export const fallbackHeader: MenuItem[] = [
-  { label: 'Programs', href: '/programs' },
-  { label: 'Learn', href: '/learn' },
-  { label: 'Resources', href: '/resources' },
-  { label: 'Events', href: '/events' },
-  { label: 'Stories', href: '/stories' },
-  { label: 'Get involved', href: '/get-involved' },
-  { label: 'Donate', href: '/donate' },
-];
+export const fallbackHeader: MenuItem[] = [...primaryNav, { label: 'Donate', href: '/donate' }];
 
 export const fallbackFooter: MenuItem[] = [
   { label: 'About', href: '/about' },

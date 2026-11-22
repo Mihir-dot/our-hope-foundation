@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { brand } from '@ohf/shared';
-import { HopeLogo } from '@/components/brand/HopeLogo';
 import { FadeIn } from '@/components/blocks/FadeIn';
 import { CountUp } from '@/components/motion/CountUp';
 import { JourneyPath, Whisper } from '@/components/motion/JourneyPath';
@@ -97,8 +96,9 @@ function Heading({ eyebrow, title, text }: { eyebrow?: string; title?: string; t
   );
 }
 
-async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
+async function renderBlock(block: ContentBlock, settings: SiteSettings | null, compact = false) {
   const data = block.data ?? {};
+  const sectionClass = compact ? 'section page-section' : 'section';
 
   switch (block.type) {
     case 'hero': {
@@ -123,9 +123,12 @@ async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
     case 'richText': {
       const html = text(data, 'html') || text(data, 'text');
       if (!html) return null;
+      if (compact) {
+        return <div className="prose prose-page" dangerouslySetInnerHTML={{ __html: sanitizeHtml(html) }} />;
+      }
       return (
-        <section className="section">
-          <div className="container prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(html) }} />
+        <section className={sectionClass}>
+          <div className="container prose prose-page" dangerouslySetInnerHTML={{ __html: sanitizeHtml(html) }} />
         </section>
       );
     }
@@ -198,6 +201,54 @@ async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
                 );
               })}
             </div>
+          </div>
+        </section>
+      );
+    }
+    case 'moduleGrid': {
+      const modules = records(data.items) ?? records(data.modules) ?? [];
+      return (
+        <section className="section module-section">
+          <div className="container">
+            <Heading
+              eyebrow={text(data, 'eyebrow', 'What we offer')}
+              title={text(data, 'title', 'Support for every stage of family life')}
+              text={text(
+                data,
+                'text',
+                'Explore programs, learning pathways, resources and ways to get involved — hover a module to see related links.',
+              )}
+            />
+            <Stagger className="module-grid">
+              {modules.map((mod, index) => {
+                const href = text(mod, 'href', '#');
+                const links = records(mod.links) ?? [];
+                const icon = text(mod, 'icon', 'compass');
+                return (
+                  <StaggerItem key={text(mod, 'title') || index}>
+                    <article className="module-card" tabIndex={0}>
+                      <Link href={href} className="module-card-top">
+                        <div className="module-icon">
+                          <JourneyIcon name={icon} />
+                        </div>
+                        <h3>{text(mod, 'title')}</h3>
+                        <p className="module-summary">{text(mod, 'summary') || text(mod, 'text')}</p>
+                        <span className="module-card-cta">Learn more →</span>
+                      </Link>
+                      {links.length ? (
+                        <div className="module-links" aria-label={`${text(mod, 'title')} links`}>
+                          {links.map((link, linkIndex) => (
+                            <Link key={linkIndex} href={text(link, 'href', href)}>
+                              {text(link, 'label')}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </article>
+                  </StaggerItem>
+                );
+              })}
+            </Stagger>
           </div>
         </section>
       );
@@ -389,7 +440,7 @@ async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
               </div>
               <TextReveal as="h2">{text(data, 'title', 'Give families more good days')}</TextReveal>
               <p>{text(data, 'text', 'Gifts fund workshops, resources, and community events.')}</p>
-              <Button href={action.href} variant={action.href.includes('donate') ? 'donate' : 'secondary'} className="btn-glow">
+              <Button href={action.href} variant={action.href.includes('donate') ? 'donate' : 'secondary'}>
                 {action.label}
               </Button>
             </div>
@@ -436,15 +487,17 @@ async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
     }
     case 'splitFeature': {
       return (
-        <section className="section">
-          <div className="container split">
+        <section className={sectionClass}>
+          <div className="container page-layout-2">
             <div>
               <Heading eyebrow={text(data, 'eyebrow')} title={text(data, 'title')} text={text(data, 'text')} />
               {cta(data.cta) ? <Button href={cta(data.cta)!.href}>{cta(data.cta)!.label}</Button> : null}
             </div>
-            <div className="sand-panel">
-              <HopeLogo variant="mark" decorative />
-            </div>
+            <aside className="info-card">
+              <p className="eyebrow">Our Hope</p>
+              <h3>Family education first</h3>
+              <p>Programs, resources and events for parents, carers, siblings and guardians — clear, practical and respectful.</p>
+            </aside>
           </div>
         </section>
       );
@@ -477,15 +530,23 @@ async function renderBlock(block: ContentBlock, settings: SiteSettings | null) {
   }
 }
 
-export async function BlockRenderer({ blocks, animate = false }: { blocks: ContentBlock[]; animate?: boolean }) {
+export async function BlockRenderer({
+  blocks,
+  animate = false,
+  compact = false,
+}: {
+  blocks: ContentBlock[];
+  animate?: boolean;
+  compact?: boolean;
+}) {
   const needsSettings = blocks.some((block) => block.type === 'statRow' || block.type === 'trustRow' || block.type === 'hero');
   const settings = needsSettings ? await getSettings() : null;
   const nodes = await Promise.all(
     blocks.map(async (block) => {
-      const content = await renderBlock(block, settings);
+      const content = await renderBlock(block, settings, compact);
       if (!content) return null;
       return animate ? <FadeIn key={block.id}>{content}</FadeIn> : <div key={block.id}>{content}</div>;
     }),
   );
-  return <>{nodes}</>;
+  return compact ? <div className="page-blocks">{nodes}</div> : <>{nodes}</>;
 }

@@ -68,6 +68,7 @@ export const blockTypes = [
   'richText',
   'journey',
   'cardGrid',
+  'moduleGrid',
   'statRow',
   'eventList',
   'programList',

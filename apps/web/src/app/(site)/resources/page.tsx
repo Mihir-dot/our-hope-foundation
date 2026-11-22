@@ -26,21 +26,23 @@ export default async function ResourcesPage({
   const result = await listResources({ topic, type, language, q, page, limit: 12 });
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Library" title="Resources" lede="Short pieces written for the kitchen table, not the clinic." />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
-          <form className="inline-search" action="/resources" method="get">
-            <div className="field">
-              <label htmlFor="resource-q">Search resources</label>
-              <input id="resource-q" name="q" defaultValue={q} />
+          <div className="list-toolbar">
+            <form className="inline-search" action="/resources" method="get">
+              <div className="field">
+                <label htmlFor="resource-q">Search resources</label>
+                <input id="resource-q" name="q" defaultValue={q} />
+              </div>
+              <button className="btn btn-secondary" type="submit">Search</button>
+            </form>
+            <div className="filter-stack">
+              <FilterBar label="Type" path="/resources" param="type" current={type} keep={{ topic, language, q }} options={resourceTypes.map((item) => ({ value: item, label: labelize(item) }))} />
+              <FilterBar label="Topic" path="/resources" param="topic" current={topic} keep={{ type, language, q }} options={topics.map((item) => ({ value: item, label: labelize(item) }))} />
+              <FilterBar label="Language" path="/resources" param="language" current={language} keep={{ topic, type, q }} options={resourceLanguages.map((item) => ({ value: item, label: item.toUpperCase() }))} />
             </div>
-            <button className="btn btn-secondary" type="submit">Search</button>
-          </form>
-          <div className="filter-stack">
-            <FilterBar label="Type" path="/resources" param="type" current={type} keep={{ topic, language, q }} options={resourceTypes.map((item) => ({ value: item, label: labelize(item) }))} />
-            <FilterBar label="Topic" path="/resources" param="topic" current={topic} keep={{ type, language, q }} options={topics.map((item) => ({ value: item, label: labelize(item) }))} />
-            <FilterBar label="Language" path="/resources" param="language" current={language} keep={{ topic, type, q }} options={resourceLanguages.map((item) => ({ value: item, label: item.toUpperCase() }))} />
           </div>
           {result.items.length ? (
             <div className="grid-cards">
@@ -54,6 +56,6 @@ export default async function ResourcesPage({
           <Pager page={result.meta?.page || page} pages={result.meta?.pages || 1} path="/resources" query={{ topic, type, language, q }} />
         </div>
       </section>
-    </>
+    </div>
   );
 }

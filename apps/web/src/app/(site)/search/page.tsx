@@ -33,10 +33,10 @@ export default async function SearchPage({
   const empty = results && !results.programs.length && !results.resources.length && !results.stories.length && !results.events.length;
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Search" title="Find something useful" lede="Programs, resources, stories, and events." />
-      <section className="section">
-        <div className="container">
+      <section className="section page-section">
+        <div className="container narrow">
           <form className="search-panel" action="/search" method="get" role="search">
             <div className="field">
               <label htmlFor="q">Search</label>
@@ -56,6 +56,6 @@ export default async function SearchPage({
           ) : null}
         </div>
       </section>
-    </>
+    </div>
   );
 }

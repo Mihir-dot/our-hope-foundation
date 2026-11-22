@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Outfit, Source_Serif_4 } from 'next/font/google';
 import { SkipLink } from '@/components/layout/SkipLink';
 import './globals.css';
@@ -14,6 +14,12 @@ const sourceSerif = Source_Serif_4({
   variable: '--font-serif-face',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),

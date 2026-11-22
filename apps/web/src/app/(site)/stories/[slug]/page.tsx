@@ -19,9 +19,9 @@ export default async function StoryPage({ params }: Params) {
   if (!story) notFound();
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Story" title={story.title} lede={story.excerpt} />
-      <section className="section">
+      <section className="section page-section">
         <div className="container narrow">
           <p className="meta">
             {story.authorName || 'A family'}
@@ -30,6 +30,6 @@ export default async function StoryPage({ params }: Params) {
           <Prose text={story.body} />
         </div>
       </section>
-    </>
+    </div>
   );
 }

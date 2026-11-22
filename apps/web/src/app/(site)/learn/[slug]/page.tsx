@@ -18,9 +18,9 @@ export default async function PathwayPage({ params }: Params) {
   if (!pathway) notFound();
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Reading pathway" title={pathway.title} lede={pathway.summary} />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
           <div className="grid-cards">
             {(pathway.resources ?? []).map((resource) => (
@@ -29,6 +29,6 @@ export default async function PathwayPage({ params }: Params) {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

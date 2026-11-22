@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default async function LearnPage() {
   const result = await listPathways({ limit: 24 });
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Reading pathways" title="Learn" lede="Start with a short list. Each pathway points to resources you can use this week." />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
           {result.items.length ? (
             <div className="grid-cards">
@@ -27,6 +27,6 @@ export default async function LearnPage() {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }

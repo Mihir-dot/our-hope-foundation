@@ -4,6 +4,7 @@ const menuItemSchema = new Schema(
   {
     label: { type: String, required: true },
     href: { type: String, required: true },
+    description: { type: String, default: undefined },
     children: { type: [Schema.Types.Mixed], default: undefined },
   },
   { _id: false },

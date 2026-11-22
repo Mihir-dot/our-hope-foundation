@@ -25,22 +25,24 @@ export default async function EventsPage({
   const result = await listEvents({ when, format, q, page, limit: 12 });
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Gatherings" title="Events" lede="Come to learn, and leave with one thing you can try at home." />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
-          <form className="inline-search" action="/events" method="get">
-            {format ? <input type="hidden" name="format" value={format} /> : null}
-            <input type="hidden" name="when" value={when} />
-            <div className="field">
-              <label htmlFor="event-q">Search events</label>
-              <input id="event-q" name="q" defaultValue={q} />
+          <div className="list-toolbar">
+            <form className="inline-search" action="/events" method="get">
+              {format ? <input type="hidden" name="format" value={format} /> : null}
+              <input type="hidden" name="when" value={when} />
+              <div className="field">
+                <label htmlFor="event-q">Search events</label>
+                <input id="event-q" name="q" defaultValue={q} />
+              </div>
+              <button className="btn btn-secondary" type="submit">Search</button>
+            </form>
+            <div className="filter-stack">
+              <FilterBar label="When" path="/events" param="when" current={when} keep={{ format, q }} hideAll options={[{ value: 'upcoming', label: 'Upcoming' }, { value: 'past', label: 'Past' }]} />
+              <FilterBar label="Format" path="/events" param="format" current={format} keep={{ when, q }} options={eventFormats.map((item) => ({ value: item, label: labelize(item) }))} />
             </div>
-            <button className="btn btn-secondary" type="submit">Search</button>
-          </form>
-          <div className="filter-stack">
-            <FilterBar label="When" path="/events" param="when" current={when} keep={{ format, q }} hideAll options={[{ value: 'upcoming', label: 'Upcoming' }, { value: 'past', label: 'Past' }]} />
-            <FilterBar label="Format" path="/events" param="format" current={format} keep={{ when, q }} options={eventFormats.map((item) => ({ value: item, label: labelize(item) }))} />
           </div>
           {result.items.length ? (
             <div className="grid-cards">
@@ -54,6 +56,6 @@ export default async function EventsPage({
           <Pager page={result.meta?.page || page} pages={result.meta?.pages || 1} path="/events" query={{ when, format, q }} />
         </div>
       </section>
-    </>
+    </div>
   );
 }

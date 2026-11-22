@@ -23,11 +23,11 @@ export default async function EventPage({ params }: Params) {
   const place = [event.venueName, event.address, event.state].filter(Boolean).join(', ');
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow={event.format ? labelize(event.format) : 'Event'} title={event.title} lede={event.summary} />
-      <section className="section">
-        <div className="container detail-grid">
-          <div>
+      <section className="section page-section">
+        <div className="container page-layout-2">
+          <div className="page-primary">
             <p className="meta">
               {formatSydneyDate(event.startAt)}
               {event.endAt ? ` – ${formatSydneyDate(event.endAt)}` : ''} · Australia/Sydney
@@ -46,13 +46,14 @@ export default async function EventPage({ params }: Params) {
               </div>
             ) : null}
           </div>
-          <aside className="card">
+          <aside className="info-card">
+            <p className="eyebrow">Register</p>
             {event.format ? <Badge tone="info">{labelize(event.format)}</Badge> : null}
             {place ? <p>{place}</p> : <p>The joining details arrive by email after you register.</p>}
             {open ? <EventRegisterForm slug={event.slug} /> : <p className="notice">Registration for this event has closed.</p>}
           </aside>
         </div>
       </section>
-    </>
+    </div>
   );
 }

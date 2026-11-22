@@ -26,21 +26,23 @@ export default async function ProgramsPage({
   const result = await listPrograms({ topic, audience, format, q, page, limit: 12 });
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Learning" title="Programs" lede="Practical education for families. A program is a place to learn, not a clinical service." />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
-          <form className="inline-search" action="/programs" method="get">
-            <div className="field">
-              <label htmlFor="program-q">Search programs</label>
-              <input id="program-q" name="q" defaultValue={q} />
+          <div className="list-toolbar">
+            <form className="inline-search" action="/programs" method="get">
+              <div className="field">
+                <label htmlFor="program-q">Search programs</label>
+                <input id="program-q" name="q" defaultValue={q} />
+              </div>
+              <button className="btn btn-secondary" type="submit">Search</button>
+            </form>
+            <div className="filter-stack">
+              <FilterBar label="Topic" path="/programs" param="topic" current={topic} keep={{ audience, format, q }} options={topics.map((item) => ({ value: item, label: labelize(item) }))} />
+              <FilterBar label="Who it is for" path="/programs" param="audience" current={audience} keep={{ topic, format, q }} options={audiences.map((item) => ({ value: item, label: labelize(item) }))} />
+              <FilterBar label="Format" path="/programs" param="format" current={format} keep={{ topic, audience, q }} options={programFormats.map((item) => ({ value: item, label: labelize(item) }))} />
             </div>
-            <button className="btn btn-secondary" type="submit">Search</button>
-          </form>
-          <div className="filter-stack">
-            <FilterBar label="Topic" path="/programs" param="topic" current={topic} keep={{ audience, format, q }} options={topics.map((item) => ({ value: item, label: labelize(item) }))} />
-            <FilterBar label="Who it is for" path="/programs" param="audience" current={audience} keep={{ topic, format, q }} options={audiences.map((item) => ({ value: item, label: labelize(item) }))} />
-            <FilterBar label="Format" path="/programs" param="format" current={format} keep={{ topic, audience, q }} options={programFormats.map((item) => ({ value: item, label: labelize(item) }))} />
           </div>
           {result.items.length ? (
             <div className="grid-cards">
@@ -54,6 +56,6 @@ export default async function ProgramsPage({
           <Pager page={result.meta?.page || page} pages={result.meta?.pages || 1} path="/programs" query={{ topic, audience, format, q }} />
         </div>
       </section>
-    </>
+    </div>
   );
 }

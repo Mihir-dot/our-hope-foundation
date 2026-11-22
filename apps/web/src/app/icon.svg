@@ -1,7 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#FFF8F1"/>
-  <path d="M18 46c6-14 10-18 14-18s8 4 14 18" fill="#2F8F3A"/>
-  <path d="M28 18h8l2 8H26z" fill="#1A2456"/>
-  <path d="M24 26h16l4 20H20z" fill="#E86A12"/>
-  <rect x="29" y="32" width="6" height="8" fill="#FFE566"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0A5F6C"/>
+  <path d="M8 52c8-10 18-12 28-6 6 4 12 2 20-2 2 1 3 5 1 7-10 4-22 3-32 1-8-2-15-1-17 0z" fill="#2F9E6B"/>
+  <path d="M22 18h20l2 4H20z" fill="#12263A"/>
+  <path d="M24 8h16l4 10H20z" fill="#12263A"/>
+  <path d="M20 8l12-6 12 6H20z" fill="#12263A"/>
+  <rect x="28" y="11" width="8" height="5" rx="1" fill="#F5B400"/>
+  <rect x="30" y="3" width="4" height="5" rx="1" fill="#12263A"/>
+  <circle cx="32" cy="2.5" r="1.5" fill="#12263A"/>
+  <path d="M21 22h22l5 24H16z" fill="#12263A"/>
+  <rect x="17" y="22" width="5" height="24" fill="#3B82F6"/>
+  <rect x="22" y="22" width="5" height="24" fill="#7C3AED"/>
+  <rect x="27" y="22" width="5" height="24" fill="#E11D8A"/>
+  <rect x="32" y="22" width="5" height="24" fill="#FF6B3D"/>
+  <rect x="37" y="22" width="5" height="24" fill="#F5B400"/>
+  <rect x="42" y="22" width="5" height="24" fill="#2F9E6B"/>
+  <rect x="47" y="22" width="4" height="24" fill="#0E8A9A"/>
+  <path d="M29 34c0-4 2-6 3.5-6S36 30 36 34v8H29z" fill="#FFF8F1" opacity="0.95"/>
+  <rect x="30.5" y="28" width="3" height="4" fill="#F5B400"/>
 </svg>

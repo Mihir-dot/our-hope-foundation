@@ -19,6 +19,7 @@ export const siteMedia = {
     '/media/program-6.jpg',
   ],
   resources: ['/media/resource-1.jpg', '/media/resource-2.jpg', '/media/resource-3.jpg'],
+  stories: ['/media/story-1.jpg', '/media/story-2.jpg', '/media/story-3.jpg'],
 } as const;
 
 const programBySlug: Record<string, string> = {
@@ -43,5 +44,5 @@ export function resourceImage(slug: string, index = 0) {
 }
 
 export function storyImage(index = 0) {
-  return siteMedia.programs[index % siteMedia.programs.length];
+  return siteMedia.stories[Math.abs(index) % siteMedia.stories.length];
 }

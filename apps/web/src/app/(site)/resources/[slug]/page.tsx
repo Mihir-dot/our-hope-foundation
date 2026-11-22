@@ -22,11 +22,11 @@ export default async function ResourcePage({ params }: Params) {
   const downloadable = Boolean(resource.externalUrl || resource.fileId || resource.type === 'pdf' || resource.type === 'tip-sheet');
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow={resource.type ? labelize(resource.type) : 'Resource'} title={resource.title} lede={resource.summary} />
-      <section className="section">
-        <div className="container detail-grid">
-          <div>
+      <section className="section page-section">
+        <div className="container page-layout-2">
+          <div className="page-primary">
             <Prose text={resource.body} />
             {resource.transcript ? (
               <details className="faq">
@@ -35,7 +35,8 @@ export default async function ResourcePage({ params }: Params) {
               </details>
             ) : null}
           </div>
-          <aside className="card">
+          <aside className="info-card">
+            <p className="eyebrow">Resource</p>
             <div className="chips">
               {resource.language ? <Badge>{resource.language.toUpperCase()}</Badge> : null}
               {resource.minutes ? <Badge tone="info">{resource.minutes} min</Badge> : null}
@@ -46,6 +47,6 @@ export default async function ResourcePage({ params }: Params) {
           </aside>
         </div>
       </section>
-    </>
+    </div>
   );
 }

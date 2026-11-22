@@ -15,7 +15,8 @@ export const metadata: Metadata = {
 export default async function DonatePage() {
   const settings = await getSettings();
   return (
-    <section className="section donate-section">
+    <div className="page-main">
+    <section className="section page-section donate-section">
       <div className="container donate-grid">
         <Reveal>
           <p className="eyebrow">Your support changes lives</p>
@@ -31,8 +32,10 @@ export default async function DonatePage() {
             <Image
               src={siteMedia.donate}
               alt="Parent and child reading together by the coast"
-              width={900}
-              height={1100}
+              width={2000}
+              height={1600}
+              quality={90}
+              sizes="(max-width: 980px) 100vw, 520px"
               className="donate-photo-img"
               priority
             />
@@ -66,5 +69,6 @@ export default async function DonatePage() {
         </Reveal>
       </div>
     </section>
+    </div>
   );
 }

@@ -21,17 +21,19 @@ export default async function StoriesPage({
   const result = await listStories({ q, page, limit: 12 });
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow="Families" title="Stories" lede="Short accounts, shared with permission. Names are the ones families asked us to use." />
-      <section className="section">
+      <section className="section page-section">
         <div className="container">
-          <form className="inline-search" action="/stories" method="get">
-            <div className="field">
-              <label htmlFor="story-q">Search stories</label>
-              <input id="story-q" name="q" defaultValue={q} />
-            </div>
-            <button className="btn btn-secondary" type="submit">Search</button>
-          </form>
+          <div className="list-toolbar">
+            <form className="inline-search" action="/stories" method="get">
+              <div className="field">
+                <label htmlFor="story-q">Search stories</label>
+                <input id="story-q" name="q" defaultValue={q} />
+              </div>
+              <button className="btn btn-secondary" type="submit">Search</button>
+            </form>
+          </div>
           {result.items.length ? (
             <div className="grid-cards">
               {result.items.map((story, index) => (
@@ -44,6 +46,6 @@ export default async function StoriesPage({
           <Pager page={result.meta?.page || page} pages={result.meta?.pages || 1} path="/stories" query={{ q }} />
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -105,7 +105,7 @@ export function DonateForm({
         hint="A name or note to print with the receipt."
       />
       {error ? <p className="field-error" role="alert">{error}</p> : null}
-      <Button type="submit" variant="donate" className="btn-glow" disabled={pending}>
+      <Button type="submit" variant="donate" disabled={pending}>
         {pending ? 'Opening checkout…' : monthly ? 'Give monthly' : 'Donate'} <HeartPulse />
       </Button>
       <p className="field-hint">

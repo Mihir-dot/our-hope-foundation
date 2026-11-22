@@ -39,7 +39,7 @@ export function HeroSection({
           </HeroLine>
           <HeroLine>
             <div className="hero-actions">
-              <MagneticButton href={primary.href} className="btn btn-primary btn-glow" strength={14}>
+              <MagneticButton href={primary.href} className="btn btn-primary" strength={0}>
                 {primary.label} →
               </MagneticButton>
               <Button href={secondary.href} variant="secondary">

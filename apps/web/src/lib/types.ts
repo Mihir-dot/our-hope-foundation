@@ -108,7 +108,12 @@ export type Pathway = {
   resources?: Resource[];
 };
 
-export type MenuItem = { label: string; href: string; children?: MenuItem[] };
+export type MenuItem = {
+  label: string;
+  href: string;
+  description?: string;
+  children?: MenuItem[];
+};
 
 export type MenuDoc = { id?: string; location: string; items: MenuItem[] };
 

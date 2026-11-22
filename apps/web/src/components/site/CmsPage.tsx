@@ -26,17 +26,24 @@ export async function CmsPage({
 }) {
   const page = await getPage(slug);
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow={eyebrow} title={page?.title || fallbackTitle} lede={lede || page?.seo?.description} />
       {page?.blocks?.length ? (
-        <BlockRenderer blocks={page.blocks} />
+        <div className="page-cms">
+          <BlockRenderer blocks={page.blocks} />
+        </div>
       ) : (
-        <section className="section">
+        <section className="section page-section">
           <div className="container">
-            <EmptyState title="This page is being prepared" body="Please check back soon, or write to us if you need it now." actionHref="/contact" actionLabel="Contact" />
+            <EmptyState
+              title="This page is being prepared"
+              body="Please check back soon, or write to us if you need it now."
+              actionHref="/contact"
+              actionLabel="Contact"
+            />
           </div>
         </section>
       )}
-    </>
+    </div>
   );
 }

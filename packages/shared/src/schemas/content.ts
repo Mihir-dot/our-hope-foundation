@@ -151,11 +151,13 @@ export const donationCheckoutSchema = z.object({
 export const menuItemSchema: z.ZodType<{
   label: string;
   href: string;
-  children?: { label: string; href: string; children?: unknown[] }[];
+  description?: string;
+  children?: { label: string; href: string; description?: string; children?: unknown[] }[];
 }> = z.lazy(() =>
   z.object({
     label: z.string().min(1).max(80),
     href: z.string().min(1).max(300),
+    description: z.string().max(240).optional(),
     children: z.array(menuItemSchema).optional(),
   }),
 );

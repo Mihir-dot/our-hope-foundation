@@ -8,7 +8,14 @@ import type { EventItem, Pathway, Program, Resource, Story } from '@/lib/types';
 function MediaCover({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="card-media">
-      <Image src={src} alt={alt} fill sizes="(max-width: 720px) 100vw, 33vw" className="card-media-img" />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        quality={85}
+        sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 400px"
+        className="card-media-img"
+      />
     </div>
   );
 }

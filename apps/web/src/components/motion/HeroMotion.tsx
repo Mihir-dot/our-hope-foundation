@@ -46,29 +46,29 @@ export function HeroPhoto({ src, alt }: { src: string; alt: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 56]);
-  const scale = useTransform(scrollYProgress, [0, 1], [reduce ? 1 : 1.04, reduce ? 1 : 1.08]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 28]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.03]);
 
   return (
     <div className="hero-photo" ref={ref}>
       <motion.div
         className="hero-photo-motion"
         style={{ y, scale }}
-        initial={reduce ? false : { scale: 1.04, opacity: 0.88 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <Image src={src} alt={alt} width={900} height={720} priority sizes="(max-width: 980px) 100vw, 48vw" />
+        <Image
+          src={src}
+          alt={alt}
+          width={2400}
+          height={1600}
+          priority
+          quality={90}
+          sizes="(max-width: 640px) 100vw, (max-width: 1100px) 90vw, 720px"
+        />
       </motion.div>
-      {!reduce ? (
-        <>
-          <div className="hero-photo-sheen" aria-hidden />
-          <div className="hero-hope-beam" aria-hidden />
-          <div className="hero-vignette" aria-hidden />
-        </>
-      ) : (
-        <div className="hero-vignette" aria-hidden />
-      )}
+      <div className="hero-vignette" aria-hidden />
     </div>
   );
 }

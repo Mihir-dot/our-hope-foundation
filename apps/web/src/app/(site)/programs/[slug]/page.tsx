@@ -23,12 +23,15 @@ export default async function ProgramPage({ params }: Params) {
   if (!program) notFound();
 
   return (
-    <>
+    <div className="page-main">
       <PageHero eyebrow={program.format ? labelize(program.format) : 'Program'} title={program.title} lede={program.summary} />
-      <section className="section">
-        <div className="container detail-grid">
-          <Prose text={program.body} />
-          <aside className="card">
+      <section className="section page-section">
+        <div className="container page-layout-2">
+          <div className="page-primary">
+            <Prose text={program.body} />
+          </div>
+          <aside className="info-card">
+            <p className="eyebrow">Program details</p>
             {program.durationText ? <p><strong>Time</strong><br />{program.durationText}</p> : null}
             {program.audiences?.length ? (
               <div className="chips">{program.audiences.map((item) => <Badge key={item}>{labelize(item)}</Badge>)}</div>
@@ -41,6 +44,6 @@ export default async function ProgramPage({ params }: Params) {
           </aside>
         </div>
       </section>
-    </>
+    </div>
   );
 }
